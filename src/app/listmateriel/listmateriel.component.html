@@ -1,0 +1,39 @@
+
+<h1>exercice 1</h1>
+<ul>
+    <li *ngFor="let m of materiels; let indice = index; let compteur = count">
+      {{ m.nom }}
+      <img [src]="m.image" style="width: 100px;">
+      <span>Référence: {{ m.reference }} Prix: {{ m.prix }} État: {{ m.etat }}</span>
+      <button *ngIf="m.etat === 'endommagé'" (click)="reparerMateriel(m)">Réparer</button>
+      
+    </li>
+  </ul>
+  
+
+  <div class="container">
+    <div class="row">
+      <ul class="list-group">
+        <li *ngFor="let m of materiels; let indice = index; let compteur = count" class="list-group-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="product-info">
+              <h2 class="text-uppercase">{{ m.nom }}</h2>
+              <img [src]="m.image" style="width: 100px;">
+              <span>Référence: {{ m.reference }}</span>
+              
+              <span class="badge rounded-pill" [ngClass]="{'bg-warning': m.prix < 200, 'bg-dark': m.prix >= 200}">
+                <ng-container *ngIf="m.prix > 200">
+                  <i class="fas fa-coins"></i>
+                </ng-container> Prix: {{ m.prix | currency:'TND':'symbol':'1.2-2' }}
+              </span>
+              État: {{ m.etat }}
+            </div>
+            <div class="product-actions">
+              <button *ngIf="m.etat === 'endommagé'" (click)="reparerMateriel(m)" class="btn btn-primary">Réparer</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
